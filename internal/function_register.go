@@ -1,10 +1,10 @@
 package internal
 
 import (
+	"encoding/json"
 	"fmt"
 	"sync"
 
-	"github.com/goccy/go-json"
 	"github.com/mattn/go-sqlite3"
 )
 
@@ -118,6 +118,10 @@ var normalFuncs = []*FuncInfo{
 	{Name: "justify_days", BindFunc: bindJustifyDays},
 	{Name: "justify_hours", BindFunc: bindJustifyHours},
 	{Name: "justify_interval", BindFunc: bindJustifyInterval},
+
+	// geography functions
+	{Name: "st_geogpoint", BindFunc: bindStGeogPoint},
+	{Name: "st_distance", BindFunc: bindStDistance},
 
 	// numeric/bignumeric functions
 	{Name: "parse_numeric", BindFunc: bindParseNumeric},

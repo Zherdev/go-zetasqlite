@@ -653,7 +653,7 @@ A list of ZetaSQL ( Google Standard SQL ) specifications and features supported 
 - [ ] ST_GEOGFROMGEOJSON
 - [ ] ST_GEOGFROMTEXT
 - [ ] ST_GEOGFROMWKB
-- [ ] ST_GEOGPOINT
+- [x] ST_GEOGPOINT
 - [ ] ST_GEOGPOINTFROMGEOHASH
 - [ ] ST_GEOHASH
 - [ ] ST_GEOMETRYTYPE

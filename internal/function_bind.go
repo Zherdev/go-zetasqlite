@@ -1,11 +1,10 @@
 package internal
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"sync"
-
-	"github.com/goccy/go-json"
 )
 
 type SQLiteFunction func(...interface{}) (interface{}, error)
@@ -592,6 +591,35 @@ func bindJustifyInterval(args ...Value) (Value, error) {
 		return nil, fmt.Errorf("JUSTIFY_INTERVAL: unexpected argument type %T", args[0])
 	}
 	return JUSTIFY_INTERVAL(interval)
+}
+
+func bindStGeogPoint(args ...Value) (Value, error) {
+	if len(args) != 2 {
+		return nil, fmt.Errorf("ST_GEOGPOINT: invalid argument num %d", len(args))
+	}
+	if existsNull(args) {
+		return nil, nil
+	}
+
+	longitude, err := args[0].ToFloat64()
+	if err != nil {
+		return nil, fmt.Errorf("ST_GEOGPOINT: invalid argument: %w", err)
+	}
+	latitude, err := args[0].ToFloat64()
+	if err != nil {
+		return nil, fmt.Errorf("ST_GEOGPOINT: invalid argument: %w", err)
+	}
+
+	return ST_GEOGPOINT(longitude, latitude)
+}
+
+func bindStDistance(args ...Value) (Value, error) {
+	geo1, ok := args[0].(*GeographyValue)
+	if !ok {
+		return nil, fmt.Errorf("ST_DISTANCE: unexpected argument type %T", args[0])
+	}
+
+	return ST_DISTANCE(interval)
 }
 
 func bindParseNumeric(args ...Value) (Value, error) {
