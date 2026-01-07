@@ -332,7 +332,7 @@ func (r *Rows) assignInterfaceValue(src Value, dst reflect.Value, typ *Type) err
 		}
 		dst.Set(sliceRef.Elem())
 	case types.GEOGRAPHY:
-		s, err := src.ToString()
+		s, err := src.ToApiString()
 		if err != nil {
 			return err
 		}

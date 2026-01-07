@@ -98,6 +98,10 @@ func (g *GeographyValue) String() (string, error) {
 	return g.ToWKT()
 }
 
+func (g *GeographyValue) ToApiString() (string, error) {
+	return g.ToWKT()
+}
+
 func (g *GeographyValue) ToBytes() ([]byte, error) {
 	v, err := g.ToString()
 	if err != nil {
